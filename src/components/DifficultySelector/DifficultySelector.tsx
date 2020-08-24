@@ -3,7 +3,7 @@ import { Grid, Button, Typography } from '@material-ui/core';
 import { difficultyHandler } from '../../App';
 import styles from './DifficultySelector.module.css';
 
-export const DifficultySelector = () => {
+const DifficultySelector = () => {
 	const difficulty = [ { id: 'easy', name: 'Easy' }, { id: 'medium', name: 'Medium' }, { id: 'hard', name: 'Hard' } ];
 
 	const [ difficultySelection, setDifficultySelection ] = useState('easy');
@@ -33,3 +33,5 @@ export const DifficultySelector = () => {
 		</div>
 	);
 };
+
+export default DifficultySelector;

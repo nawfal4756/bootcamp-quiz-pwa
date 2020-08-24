@@ -3,7 +3,7 @@ import styles from './TypeSelector.module.css';
 import { Grid, Typography, FormControl, RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
 import { typeHandler } from '../../App';
 
-export const TypeSelector = () => {
+const TypeSelector = () => {
 	const [ type, setType ] = useState('multiple');
 
 	typeHandler(type);
@@ -34,3 +34,5 @@ export const TypeSelector = () => {
 		</div>
 	);
 };
+
+export default TypeSelector;

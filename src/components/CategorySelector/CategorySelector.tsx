@@ -3,7 +3,7 @@ import { Grid, Typography, Card, CardContent, Button } from '@material-ui/core';
 import { categoryHandler } from '../../App';
 import styles from './CategorySelector.module.css';
 
-export const CategorySelector = () => {
+const CategorySelector = () => {
 	const categoryList = [
 		{ id: 'any', name: 'Any', img: require('../../images/any.gif') },
 		{ id: '9', name: 'General Knowledge', img: require('../../images/generalKnowledge.jpg') },
@@ -64,3 +64,5 @@ export const CategorySelector = () => {
 		</div>
 	);
 };
+
+export default CategorySelector;

@@ -12,7 +12,7 @@ type Props = {
 	userAnswers: any;
 };
 
-export const QuestionCard: React.FC<Props> = ({
+const QuestionCard: React.FC<Props> = ({
 	questionNumber,
 	totalQuestions,
 	question,
@@ -58,3 +58,5 @@ export const QuestionCard: React.FC<Props> = ({
 		</div>
 	);
 };
+
+export default QuestionCard;

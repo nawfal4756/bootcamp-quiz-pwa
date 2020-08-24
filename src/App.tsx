@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import styles from './App.module.css';
 import { Grid, Typography, Button } from '@material-ui/core';
-import { CategorySelector } from './components/CategorySelector/CategorySelector';
-import { DifficultySelector } from './components/DifficultySelector/DifficultySelector';
-import { QuestionSelector } from './components/QuestionSelector/QuestionSelector';
 import { fetchApi, QuestionState } from './api';
-import { QuestionCard } from './components/QuestionCard/QuestionCard';
-import { TypeSelector } from './components/TypeSelector/TypeSelector';
+const QuestionSelector: any = lazy(() => import('./components/QuestionSelector/QuestionSelector'));
+const TypeSelector: any = lazy(() => import('./components/TypeSelector/TypeSelector'));
+const QuestionCard: any = lazy(() => import('./components/QuestionCard/QuestionCard'));
+const CategorySelector: any = lazy(() => import('./components/CategorySelector/CategorySelector'));
+const DifficultySelector: any = lazy(() => import('./components/DifficultySelector/DifficultySelector'));
 
 var noOfQuestions = '5';
 var categoryValue = 'any';
@@ -102,45 +102,53 @@ function App() {
 					</Typography>
 				</Grid>
 				<Grid item xs={12} className={styles.container2}>
-					{quizStart ? null : <TypeSelector />}
-					{quizStart ? null : <QuestionSelector />}
-					{quizStart ? null : <CategorySelector />}
-					{quizStart ? null : <DifficultySelector />}
-					{!loading && !quizOver ? (
-						<QuestionCard
-							questionNumber={number + 1}
-							totalQuestions={noOfQuestions}
-							question={questions[number].question}
-							answers={questions[number].answers}
-							callback={answerCheck}
-							score={score}
-							userAnswers={userAnswer[number]}
-						/>
-					) : null}
-					{loading && navigator.onLine ? <Typography>Loading...</Typography> : null}
-					{!navigator.onLine && quizStart ? (
-						<Typography className={styles.error} variant="h4">
-							Please Connect to the internet and try again!
-						</Typography>
-					) : null}
-					{quizStart ? null : (
-						<Button variant="outlined" className={styles.buttons} onClick={startQuiz}>
-							Start Quiz
-						</Button>
-					)}
-					{userAnswer.length === Number(noOfQuestions) || press === Number(noOfQuestions) ? (
-						<Button onClick={quizStartAgain} variant="outlined">
-							Start Quiz Again
-						</Button>
-					) : null}
-					{!loading &&
-					quizStart &&
-					userAnswer.length !== Number(noOfQuestions) &&
-					press !== Number(noOfQuestions) ? (
-						<Button variant="outlined" onClick={nextQuestion}>
-							Next Question
-						</Button>
-					) : null}
+					<Suspense
+						fallback={
+							<Typography className={styles.heading} variant="h3">
+								Loading the data... Please Wait.
+							</Typography>
+						}
+					>
+						{quizStart ? null : <TypeSelector />}
+						{quizStart ? null : <QuestionSelector />}
+						{quizStart ? null : <CategorySelector />}
+						{quizStart ? null : <DifficultySelector />}
+						{!loading && !quizOver ? (
+							<QuestionCard
+								questionNumber={number + 1}
+								totalQuestions={noOfQuestions}
+								question={questions[number].question}
+								answers={questions[number].answers}
+								callback={answerCheck}
+								score={score}
+								userAnswers={userAnswer[number]}
+							/>
+						) : null}
+						{loading && navigator.onLine ? <Typography>Loading...</Typography> : null}
+						{!navigator.onLine && quizStart ? (
+							<Typography className={styles.error} variant="h4">
+								Please Connect to the internet and try again!
+							</Typography>
+						) : null}
+						{quizStart ? null : (
+							<Button variant="outlined" className={styles.buttons} onClick={startQuiz}>
+								Start Quiz
+							</Button>
+						)}
+						{userAnswer.length === Number(noOfQuestions) || press === Number(noOfQuestions) ? (
+							<Button onClick={quizStartAgain} variant="outlined">
+								Start Quiz Again
+							</Button>
+						) : null}
+						{!loading &&
+						quizStart &&
+						userAnswer.length !== Number(noOfQuestions) &&
+						press !== Number(noOfQuestions) ? (
+							<Button variant="outlined" onClick={nextQuestion}>
+								Next Question
+							</Button>
+						) : null}
+					</Suspense>
 				</Grid>
 			</Grid>
 		</div>
