@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './QuestionCard.module.css';
-import { Grid, Card, CardContent, Typography, Button, makeStyles } from '@material-ui/core';
+import { Grid, Card, CardContent, Typography, Button } from '@material-ui/core';
 
 type Props = {
 	questionNumber: number;
@@ -12,13 +12,6 @@ type Props = {
 	userAnswers: any;
 };
 
-const useStyles = makeStyles((theme) => ({
-	container: {
-		[theme.breakpoints.up('xs')]: {
-			width: 350
-		}
-	}
-}));
 
 const QuestionCard: React.FC<Props> = ({
 	questionNumber,
@@ -30,12 +23,12 @@ const QuestionCard: React.FC<Props> = ({
 	userAnswers
 }) => {
 
-	const classes = useStyles();
+	
 
 	return (
 		<div className={styles.container}>
 			<Grid container spacing={2}>
-				<Grid item xs={12} md={12} className={classes.container}>
+				<Grid item xs={12} md={12}>
 					<Typography variant="h4">
 						Score: {score} / {questionNumber}
 					</Typography>
@@ -43,7 +36,7 @@ const QuestionCard: React.FC<Props> = ({
 						Question Number: {questionNumber} / {totalQuestions}
 					</Typography>
 				</Grid>
-				<Grid item xs={12} md={12} className={classes.container}>
+				<Grid item xs={12} md={12}>
 					<Card>
 						<CardContent>
 							<Typography>{question}</Typography>

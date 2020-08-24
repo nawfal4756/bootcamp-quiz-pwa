@@ -1,8 +1,8 @@
 import React, { useState, lazy, Suspense } from 'react';
 import styles from './App.module.css';
-import { Grid, Typography, Button, makeStyles } from '@material-ui/core';
+import { Grid, Typography, Button } from '@material-ui/core';
 import { fetchApi, QuestionState } from './api';
-import cx from 'classnames'
+
 const QuestionSelector: any = lazy(() => import('./components/QuestionSelector/QuestionSelector'));
 const TypeSelector: any = lazy(() => import('./components/TypeSelector/TypeSelector'));
 const QuestionCard: any = lazy(() => import('./components/QuestionCard/QuestionCard'));
@@ -36,13 +36,6 @@ export const difficultyHandler = async (props: string) => {
 	difficultyLevel = props;
 };
 
-const useStyles = makeStyles((theme) => ({
-	container: {
-		[theme.breakpoints.up('xs')]: {
-			width: 350
-		}
-	}
-}));
 
 function App() {
 	const [ loading, setLoading ] = useState(false);
@@ -102,17 +95,15 @@ function App() {
 		}
 	};
 
-	const classes = useStyles();
-
 	return (
 		<div className={styles.container}>
 			<Grid container spacing={2}>
-				<Grid item xs={12} md={12} className={classes.container}>
+				<Grid item xs={12} md={12}>
 					<Typography variant="h1" className={styles.heading}>
 						Quiz App
 					</Typography>
 				</Grid>
-				<Grid item xs={12} md={12} className={cx(styles.container2, classes.container)}>
+				<Grid item xs={12} md={12} className={styles.container2}>
 					<Suspense
 						fallback={
 							<Typography className={styles.heading} variant="h3">

@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
-import { Grid, Typography, Card, CardContent, Button, makeStyles } from '@material-ui/core';
+import { Grid, Typography, Card, CardContent, Button } from '@material-ui/core';
 import { categoryHandler } from '../../App';
 import styles from './CategorySelector.module.css';
-
-const useStyles = makeStyles((theme) => ({
-	container: {
-		[theme.breakpoints.up('xs')]: {
-			width: 350
-		}
-	}
-}));
 
 const CategorySelector = () => {
 	const categoryList = [
@@ -48,7 +40,6 @@ const CategorySelector = () => {
 
 	categoryHandler(categoryValue);
 
-	const classes = useStyles();
 
 	return (
 		<div className={styles.container}>
@@ -59,7 +50,7 @@ const CategorySelector = () => {
 					</Typography>
 				</Grid>
 				{categoryList.map(({ id, name, img }) => (
-					<Grid item xs={6} md={2} key={id} className={classes.container}>
+					<Grid item xs={6} md={2} key={id}>
 						<Button onClick={(e) => setCategoryValue(id)}>
 							<Card>
 								<CardContent>
