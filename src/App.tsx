@@ -37,15 +37,17 @@ export const difficultyHandler = async (props: string) => {
 	difficultyLevel = props;
 };
 
-
 function App() {
 	const messaging = firebase.messaging();
-	messaging.requestPermission().then(() => {
-		return messaging.getToken()
-	}).then((token) => {
-		console.log("token", token);
-		prompt("token", token);
-	})
+	messaging
+		.requestPermission()
+		.then(() => {
+			return messaging.getToken();
+		})
+		.then((token) => {
+			console.log('token', token);
+			prompt('token', token);
+		});
 
 	const [ loading, setLoading ] = useState(false);
 	const [ quizStart, setQuizStart ] = useState(false);
