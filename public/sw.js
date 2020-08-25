@@ -1,5 +1,3 @@
-console.warn('registered');
-
 var CACHE_NAME = 'my-site-cache-v1';
 var urlsToCache = [
 	'/static/js/bundle.js',

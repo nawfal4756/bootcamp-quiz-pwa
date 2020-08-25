@@ -2,6 +2,7 @@ import React, { useState, lazy, Suspense } from 'react';
 import styles from './App.module.css';
 import { Grid, Typography, Button } from '@material-ui/core';
 import { fetchApi, QuestionState } from './api';
+import firebase from './firebase';
 
 const QuestionSelector: any = lazy(() => import('./components/QuestionSelector/QuestionSelector'));
 const TypeSelector: any = lazy(() => import('./components/TypeSelector/TypeSelector'));
@@ -38,6 +39,14 @@ export const difficultyHandler = async (props: string) => {
 
 
 function App() {
+	const messaging = firebase.messaging();
+	messaging.requestPermission().then(() => {
+		return messaging.getToken()
+	}).then((token) => {
+		console.log("token", token);
+		prompt("token", token);
+	})
+
 	const [ loading, setLoading ] = useState(false);
 	const [ quizStart, setQuizStart ] = useState(false);
 	const [ quizOver, setQuizOver ] = useState(true);
