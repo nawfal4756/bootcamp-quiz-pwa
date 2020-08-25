@@ -54,7 +54,8 @@ self.addEventListener('fetch', function(event) {
 					if (response) {
 						return response;
 					}
-					return fetch(event.request);
+					let requestUrl = event.request.clone();
+					return fetch(requestUrl);
 				})
 				.catch((err) => console.log('err', err))
 		);
