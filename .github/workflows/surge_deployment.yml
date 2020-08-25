@@ -44,4 +44,4 @@ jobs:
       run: npm install --global netlify
 
     - name: Deploy to Surge
-      run: netlify ./build https://nawfal4756-quiz-pwa.surge.sh --token ${{ secrets.NETLIFY }}
+      run: netlify ./build https://nawfal4756-quiz-pwa.netlify.app --token ${{ secrets.NETLIFY }}
